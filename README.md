@@ -88,7 +88,7 @@ export default featureFlagConfig;
 
 Setup Feature Flags in your main Index.tsx by adding the `FeatureFlagProvider` component and  setting the `config`.
 
-```\src\config\feature-flag-config.tsx```
+```\src\index.tsx```
 ```tsx
 import './index.css'
 
@@ -96,7 +96,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-import featureFlagConfig from './config/feature-flag-confg';
+import featureFlagConfig from './config/feature-flag-config';
 import FeatureFlagProvider from 'feature-flag-react-lite';
 
 
@@ -107,9 +107,9 @@ ReactDOM.render(
 , document.getElementById('root'))
 ```
 
-Read feture flags from within any component thorughout your App.
+Read feature flags from within any component throughout your App.
 
-```\src\config\feature-flag-config.tsx```
+```\src\App.tsx```
 ```tsx
 import React from 'react'
 

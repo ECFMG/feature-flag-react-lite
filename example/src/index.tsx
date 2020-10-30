@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-import featureFlagConfig from './config/feature-flag-confg';
+import featureFlagConfig from './config/feature-flag-config';
 import FeatureFlagProvider from 'feature-flag-react-lite';
 
 

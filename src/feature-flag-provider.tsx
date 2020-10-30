@@ -9,16 +9,14 @@ import FeatureFlagContext, { FeatureFlags } from './feature-flag-context'
  */
 export interface FeatureFlagConfig {
   /** maximum age for the cache (in milliseconds), defaults to 30 seconds */
-  cache: number | undefined
+  cache?: number 
   /** url to retrieve the feature flags from */
   url: string
   /** if url cannot be reached, load local feature flags */
   fallbackFlagValues: FeatureFlags
 
   /** if making authenticated feature flag requests may need to add JWT to requests */
-  axiosRequestConfig:
-    | undefined
-    | ((config: AxiosRequestConfig) => Promise<AxiosRequestConfig>)
+  axiosRequestConfig?: ((config: AxiosRequestConfig) => Promise<AxiosRequestConfig>)
 }
 export type FeatureFlagProps = {
   config: FeatureFlagConfig
