@@ -1,10 +1,6 @@
-import * as React from 'react'
-import styles from './styles.module.css'
+import useFeatureFlags from './use-feature-flag';
+import FeatureFlagProvider, { FeatureFlagConfig } from './feature-flag-provider'
 
-interface Props {
-  text: string
-}
+export { useFeatureFlags, FeatureFlagConfig }
 
-export const ExampleComponent = ({ text }: Props) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+export default FeatureFlagProvider

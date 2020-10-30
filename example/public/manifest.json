@@ -1,6 +1,6 @@
 {
-  "short_name": "feature-toggle-react-lite",
-  "name": "feature-toggle-react-lite",
+  "short_name": "feature-flag-react-lite",
+  "name": "feature-flag-react-lite",
   "icons": [
     {
       "src": "favicon.ico",

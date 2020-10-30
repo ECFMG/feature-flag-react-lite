@@ -1,13 +1,14 @@
 {
-  "name": "feature-toggle-react-lite",
-  "version": "1.0.0",
-  "description": "A lightweight Higher Order Component to quickly add Feture Toggles to any React project.",
+  "name": "feature-flag-react-lite",
+  "version": "0.0.1",
+  "description": "A lightweight Higher Order Component for quickly adding Feature Flags to any React project.",
   "author": "ecfmg",
   "license": "MIT",
-  "repository": "ecfmg/feature-toggle-react-lite",
+  "repository": "ecfmg/feature-flag-react-lite",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
+  "keywords": ["react","feature flag","feature toggle","s3","azure blob"],
   "engines": {
     "node": ">=10"
   },
@@ -36,7 +37,7 @@
     "@types/react-dom": "^16.9.7",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "microbundle-crl": "^0.13.10",
+    "microbundle-crl": "^0.13.11",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -59,5 +60,10 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "axios": "^0.21.0",
+    "axios-cache-adapter": "^2.5.0",
+    "axios-retry": "^3.1.9"
+  }
 }

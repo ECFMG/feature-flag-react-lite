@@ -1,0 +1,16 @@
+{
+  "FeatureFlags": [
+    {
+      "Name": "FeatureOne",
+      "Value": "false"
+    },
+    {
+      "Name": "FeatureTwo",
+      "Value": "true"
+    },
+    {
+      "Name": "FeatureThree",
+      "Value": "blue"
+    }
+  ]
+}
