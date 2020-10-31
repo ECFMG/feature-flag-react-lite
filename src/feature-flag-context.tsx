@@ -8,7 +8,7 @@ export interface FeatureFlags {
 }
 
 export interface FeatureFlagInterface {
-  FeatureFlagList:      FeatureFlags | undefined
+  FeatureFlagList: FeatureFlags | undefined
   GetFeatureFlagByName: (name: string) => string
 }
 
@@ -17,7 +17,7 @@ const stub = (): never => {
 }
 
 const initialContext = {
-  FeatureFlagList:      undefined,
+  FeatureFlagList: undefined,
   GetFeatureFlagByName: stub
 }
 

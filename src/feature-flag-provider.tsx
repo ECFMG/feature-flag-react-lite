@@ -65,12 +65,11 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): J
   const remoteFlags = axios.create({
     adapter: cache.adapter
   })
-
+ 
   const GetFeatureFlags = async () => {
     const options = {
       url: props.config.url
     }
-
     var result = await remoteFlags(options)
       .then((res) => {
         setFeatureFlagList(res.data)
@@ -80,7 +79,6 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): J
         console.error('Fallback to local feature flags', ex)
         setFeatureFlagList(props.config.fallbackFlagValues)
       })
-
     return result
   }
 

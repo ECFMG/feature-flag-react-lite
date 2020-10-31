@@ -133,7 +133,9 @@ export default App
 
 ## Demo
 
-[Demo Site](https://ecfmg.github.io/feature-flag-react-lite/)
+[Live Demo](https://ecfmg.github.io/feature-flag-react-lite/)
+
+[StackBlitz Demo](https://stackblitz.com/edit/feature-flag-react-lite?file=index.tsx)
 
 ## License
 

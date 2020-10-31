@@ -1,6 +1,6 @@
 {
   "name": "feature-flag-react-lite",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A lightweight Higher Order Component for quickly adding Feature Flags to any React project.",
   "author": "ecfmg",
   "license": "MIT",
@@ -13,8 +13,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build": "microbundle-crl --no-compress -f cjs src/index.cjs.tsx && microbundle-crl --no-compress -f modern src/index.tsx",
+    "start": "microbundle-crl  --no-compress watch -f modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
