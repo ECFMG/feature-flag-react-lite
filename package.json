@@ -1,6 +1,6 @@
 {
   "name": "feature-flag-react-lite",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A lightweight Higher Order Component for quickly adding Feature Flags to any React project.",
   "author": "ecfmg",
   "license": "MIT",
@@ -8,7 +8,13 @@
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
-  "keywords": ["react","feature flag","feature toggle","s3","azure blob"],
+  "keywords": [
+    "react",
+    "feature flag",
+    "feature toggle",
+    "s3",
+    "azure blob"
+  ],
   "engines": {
     "node": ">=10"
   },
