@@ -26,6 +26,7 @@ export type FeatureFlagProps = {
 const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): JSX.Element => {
   const [featureFlagList, setFeatureFlagList] = useState<FeatureFlags | undefined>(props.config.fallbackFlagValues)
 
+  let featFlagList = featureFlagList??{}; //State is not coming into async function
   const cacheTimeout = !props.config.cache ? 30 * 1000 : props.config.cache
   const isRendered = React.useRef(false) // Used to make Async code not get called on every render.
 
@@ -72,8 +73,12 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): J
     }
     var result = await remoteFlags(options)
       .then((res) => {
-        setFeatureFlagList(res.data)
-        return res.data as FeatureFlags
+        //Compare featFlagList because state coming in is always undefined for some reason
+        if (JSON.stringify(featFlagList) !== JSON.stringify(res.data)) {
+          setFeatureFlagList(res.data);
+          featFlagList = res.data;
+        }
+        return featFlagList as FeatureFlags
       })
       .catch((ex: any) => {
         console.error('Fallback to local feature flags', ex)
