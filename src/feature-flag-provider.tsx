@@ -26,7 +26,7 @@ export type FeatureFlagProps = {
 const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): JSX.Element => {
   const [featureFlagList, setFeatureFlagList] = useState<FeatureFlags | undefined>(props.config.fallbackFlagValues)
 
-  let featFlagList = featureFlagList ?? {} //State is not coming into async function
+  let featFlagList = !featureFlagList ? {} : featureFlagList //State is not coming into async function
   const cacheTimeout = !props.config.cache ? 30 * 1000 : props.config.cache
   const isRendered = React.useRef(false) // Used to make Async code not get called on every render.
 
@@ -70,7 +70,7 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): J
     adapter: cache.adapter
   })
 
-  GetFeatureFlags = async () => {
+  const GetFeatureFlags = async () => {
     const options = {
       url: props.config.url,
       method: 'get'
@@ -85,9 +85,10 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): J
       console.log(`Reading stale data due to network issue : ${result.request?.stale}`)
 
       return featFlagList as FeatureFlags
-    } catch (ex: any) {
+    } catch (ex) {
       console.error('Fallback to local feature flags', ex)
       setFeatureFlagList(props.config.fallbackFlagValues)
+      return undefined
     }
   }
 
