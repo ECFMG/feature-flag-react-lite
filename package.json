@@ -1,6 +1,6 @@
 {
   "name": "feature-flag-react-lite",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A lightweight Higher Order Component for quickly adding Feature Flags to any React project.",
   "author": "ecfmg",
   "license": "MIT",
