@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState, useEffect } from 'react'
+import React, { FC, ReactNode, useEffect } from 'react' // useState
 import axios, { AxiosRequestConfig } from 'axios'
 import { setupCache } from 'axios-cache-adapter'
 import axiosRetry from 'axios-retry'
@@ -16,15 +16,17 @@ export interface FeatureFlagConfig {
   fallbackFlagValues: FeatureFlags
 
   /** if making authenticated feature flag requests may need to add JWT to requests */
-  axiosRequestConfig?: ((config: AxiosRequestConfig) => Promise<AxiosRequestConfig>)
+  axiosRequestConfig?: (config: AxiosRequestConfig) => Promise<AxiosRequestConfig>
 }
 export type FeatureFlagProps = {
   config: FeatureFlagConfig
   children: ReactNode
 }
 
-const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): JSX.Element => {
-  const [featureFlagList, setFeatureFlagList] = useState<FeatureFlags | undefined>(props.config.fallbackFlagValues)
+const FeatureFlagProvider: FC<FeatureFlagProps> = (props: FeatureFlagProps): JSX.Element => {
+  console.log('loading component')
+  var featureFlagList: FeatureFlags | undefined
+  //const [featureFlagList, setFeatureFlagList] = useState<FeatureFlags | undefined>()
   const cacheTimeout = !props.config.cache ? 30 * 1000 : props.config.cache
   const isRendered = React.useRef(false) // Used to make Async code not get called on every render.
 
@@ -62,35 +64,44 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = ( props: FeatureFlagProps ): J
       try {
         var result = await remoteFlags(options)
         if (JSON.stringify(featureFlagList) !== JSON.stringify(result.data)) {
-          setFeatureFlagList(result.data)
+          console.log('Different')
+          featureFlagList = result.data
+          // setFeatureFlagList(result.data)
         }
         console.log(`Reading from cache : ${result.request?.fromCache}`)
-        console.log(`Reading stale data due to network issue woopie: ${result.request?.stale}`)
+        console.log(`Reading stale data due to network issue: ${result.request?.stale}`)
       } catch (ex) {
         console.error('Fallback to local feature flags', ex)
-        setFeatureFlagList(props.config.fallbackFlagValues)
+        featureFlagList = props.config.fallbackFlagValues
+        // setFeatureFlagList(props.config.fallbackFlagValues)
       }
     }
 
     ;(async () => {
       // IIFE to make async code work in a non-async Functional Component
       if (!isRendered.current) {
-        setIntervalImmediately(
-          async () => await GetFeatureFlags(),
-          cacheTimeout / 2
-        )
+        // setFeatureFlagList(props.config.fallbackFlagValues)
+        featureFlagList = props.config.fallbackFlagValues
+        setIntervalImmediately(async () => await GetFeatureFlags(), cacheTimeout / 2)
       }
     })()
     return () => {
       isRendered.current = true
     }
-  }, [featureFlagList, setFeatureFlagList, props])
+  }, []) // featureFlagList, setFeatureFlagList, props
 
   const getFeatureFlagByName = (name: string) => {
+    console.log(name)
+    return 'green'
+    /*
+    console.log('featureFlagList', featureFlagList)
     if (!featureFlagList) return ''
-    var result = featureFlagList.FeatureFlags.find((i) => i.Name === name)
-      ?.Value
-    return !result ? '' : result
+    var temp = featureFlagList.FeatureFlags
+    var result = temp.find((i) => i.Name === name)?.Value
+    var finalResult = !result ? '' : result
+    // return `${name}:${result}{${Date.now().toLocaleString()}}`
+    return finalResult
+    */
   }
 
   return (

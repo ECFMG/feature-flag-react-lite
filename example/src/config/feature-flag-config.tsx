@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from 'axios';
+//import { AxiosRequestConfig } from 'axios';
 import {FeatureFlagConfig} from 'feature-flag-react-lite';
-import defaultValues from './feature-flag-default-values.json';
-
+//import defaultValues from './feature-flag-default-values.json';
+/*
 var addJwtToFeatureFlagRequest = async (config:AxiosRequestConfig) => {
     const token = localStorage.getItem("AccessToken");
     if(token){
@@ -9,11 +9,26 @@ var addJwtToFeatureFlagRequest = async (config:AxiosRequestConfig) => {
     }
     return config
 }
-
+*/
 var featureFlagConfig : FeatureFlagConfig = {
     cache: 30 * 1000,
     url: 'https://featureflagdemo.blob.core.windows.net/flags/hosted-sample-flags.json',
-    fallbackFlagValues: defaultValues,
-    axiosRequestConfig: addJwtToFeatureFlagRequest
+    fallbackFlagValues: {
+        "FeatureFlags": [
+          {
+            "Name": "FeatureOne",
+            "Value": "false"
+          },
+          {
+            "Name": "FeatureTwo",
+            "Value": "true"
+          },
+          {
+            "Name": "FeatureThree",
+            "Value": "blue"
+          }
+        ]
+      }//,
+    //axiosRequestConfig: addJwtToFeatureFlagRequest
 }
 export default featureFlagConfig;

@@ -30,6 +30,6 @@
     "react/jsx-fragments": 0,
     "react/no-unused-prop-types": 0,
     "import/export": 0,
-    "max-len": ["error", {"code": 800, "ignoreUrls": true}]
+    "max-len": ["error", {"code": 200, "ignoreUrls": true}]
   }
 }
