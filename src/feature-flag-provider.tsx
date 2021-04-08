@@ -36,13 +36,6 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = (props: FeatureFlagProps): JSX
       return setInterval(func, interval)
     }
 
-    axios.interceptors.request.use(async (axiosConfig) => {
-      if (typeof props.config.axiosRequestConfig === 'undefined') {
-        return axiosConfig
-      }
-      return await props.config.axiosRequestConfig(axiosConfig)
-    })
-
     const cache = setupCache({
       maxAge: cacheTimeout,
       readOnError: (error: any) => {
@@ -54,6 +47,14 @@ const FeatureFlagProvider: FC<FeatureFlagProps> = (props: FeatureFlagProps): JSX
     axiosRetry(axios, { retries: 3 })
     const remoteFlags = axios.create({
       adapter: cache.adapter
+    })
+
+    remoteFlags.interceptors.request.use(async (axiosConfig) => {
+      
+      if (typeof props.config.axiosRequestConfig === 'undefined') {
+        return axiosConfig
+      }
+      return await props.config.axiosRequestConfig(axiosConfig);
     })
 
     const GetFeatureFlags = async () => {
